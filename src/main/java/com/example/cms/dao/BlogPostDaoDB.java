@@ -34,6 +34,17 @@ public class BlogPostDaoDB implements BlogPostDao{
                 new BlogPostDaoDB.BlogPostMapper(), new Object[]{hashtag.getHashtagId()});
     }
 
+    public BlogPost addNewPost(BlogPost newPost) {
+        String INSERT_POST = "INSERT INTO blogPost(postDate, postTitle, postBody) VALUES(?,?,?)";
+        this.jdbc.update(INSERT_POST,
+                newPost.getPostDate(),
+                newPost.getPostTitle(),
+                newPost.getPostBody());
+        int newId = (Integer)this.jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
+        newPost.setPostId(newId);
+        return newPost;
+    }
+
     public static final class BlogPostMapper implements RowMapper<BlogPost> {
         public BlogPostMapper() {
         }

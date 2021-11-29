@@ -11,6 +11,17 @@ public class BlogPost {
         return postHashtags;
     }
 
+    @Override
+    public String toString() {
+        return "BlogPost{" +
+                "postId=" + postId +
+                ", postDate='" + postDate + '\'' +
+                ", postTitle='" + postTitle + '\'' +
+                ", postBody='" + postBody + '\'' +
+                ", postHashtags=" + postHashtags +
+                '}';
+    }
+
     public void setPostHashtags(List<Hashtag> postHashtags) {
         this.postHashtags = postHashtags;
     }

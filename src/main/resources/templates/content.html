@@ -34,15 +34,15 @@
     </div>
 </div>
 
-<ul>
-    <li th:each="post : ${posts}">
-        <div class="m-4 border border-dark">
+<div class="m-4">
+
+    <div th:each="post : ${posts}">
         <p th:text="${post.postDate}">date</p>
         <h1 th:text="${post.postTitle}">title</h1>
-        <p th:text="${post.postBody}">post</p>
-            <div th:each="hashtag : ${post.postHashtags}">
-            <p th:text="${hashtag.hashtagName}"></p>
-            <div>
+        <p th:utext="${post.postBody}" th:id="body">post</p>
+        <div th:each="tag : ${post.postHashtags}">
+            #<span th:text="${tag.hashtagName}">tag</span>
         </div>
-    </li>
-</ul>
+        <br><br><br>
+    </div>
+</div>

@@ -32,18 +32,23 @@ public class HashtagDaoDB implements HashtagDao{
                 "  ON p.postId = ph.postId\n" +
                 "WHERE ph.postId = ?";
         return this.jdbc.query(SELECT_HASHTAG_BY_POST,
-                new HashtagDaoDB.HashtagMapper(), new Object[]{post.getPostId()});
+                new HashtagDaoDB.HashtagMapper(), post.getPostId());
     }
 
     @Override
     public Hashtag addHashtag(Hashtag tag) {
         String INSERT_HASHTAG = "INSERT INTO hashtag(hashtagName) VALUES(?)";
         this.jdbc.update(INSERT_HASHTAG,
-                tag.getHashtagName();
+                tag.getHashtagName());
         int newId = (Integer)this.jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         tag.setHashtagId(newId);
         return tag;
 
+    }
+
+    public List<Hashtag> getAllHashtagsByName(String tag) {
+        String SELECT_ALL_HASHTAGS = "SELECT * FROM hashtag WHERE hashtagName = ?";
+        return this.jdbc.query(SELECT_ALL_HASHTAGS, new HashtagDaoDB.HashtagMapper(), tag);
     }
 
     public static final class HashtagMapper implements RowMapper<Hashtag> {
