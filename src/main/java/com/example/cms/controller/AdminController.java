@@ -28,13 +28,11 @@ public class AdminController {
 
     @RequestMapping(value="/admin", method=RequestMethod.GET)
     public String displayAdminPage() {
-
         return "admin";
     }
 
     @PostMapping("addBlogPost")
     public String addBlogPost(HttpServletRequest request){
-        System.out.println("dsd");
         ArrayList<Hashtag> newPostHashtags = new ArrayList<>();
 
         int lastId = blogPostDaoDB.getAllPosts().size();
